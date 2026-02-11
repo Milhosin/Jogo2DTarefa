@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int damage = 10;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        Debug.Log(collision.transform.name);
+
+        var health = collision.gameObject.GetComponent<HealthBase>();
+
+        if (health != null)
+        {
+            health.Damage(damage);
+        }
     }
 }
