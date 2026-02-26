@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D myRigidbody;
+    public HealthBase healthBase;
 
     [Header("Speed setup")]
     public Vector2 friction = new Vector2(.1f, 0);
@@ -14,15 +15,36 @@ public class Player : MonoBehaviour
     public float forceJump = 2;
 
     [Header("Animation setup")]
+    public float jumpScaley = 1.5f;
+    public float jumpScalex = 0.7f;
     public float animationduration = .3f;
     public Ease ease = Ease.OutBack;
 
     [Header("Animation Player")]
     public string boolRun = "Run";
+    public string triggerDeath = "Death";
     public Animator animator;
     public float playerShipeDuration = .1f;
 
     private float _currentSpeed;
+
+
+
+    private void Awake()
+    {
+        if (healthBase != null)
+        {
+            healthBase.OnKill += OnPlayerKill;
+        }
+    }
+
+    private void OnPlayerKill()
+    {
+        healthBase.OnKill -= OnPlayerKill;
+
+        animator.SetTrigger(triggerDeath);
+    }
+
 
     private void Update()
     {
@@ -60,7 +82,6 @@ public class Player : MonoBehaviour
             animator.SetBool(boolRun, false);
         }
 
-        Debug.Log(myRigidbody.velocity);
 
         if (myRigidbody.velocity.x > 0)
         {
@@ -74,11 +95,25 @@ public class Player : MonoBehaviour
 
     private void HandleJump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             myRigidbody.velocity = Vector2.up * forceJump;
+            myRigidbody.transform.localScale = Vector2.one;
 
             DOTween.Kill(myRigidbody.transform);
+
+            HandlescaleJump();
         }
+    }
+
+    private void HandlescaleJump()
+    {
+        myRigidbody.transform.DOScaleY(jumpScaley, animationduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        myRigidbody.transform.DOScaleX(jumpScalex, animationduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+    }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject, 1.5f);
     }
 }
