@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ebac.Core.Singleton;
 using TMPro;
+using Ebac.Core.Singleton;
 
 public class ItemManager : Singleton<ItemManager>
 {
-    public int coins;
-    public TextMeshProUGUI uiTextCoins;
+    public SOInt coins;
+    public SOInt coinsGreen;
+    public TextMeshProUGUI uiCoins;
+    public TextMeshProUGUI uiCoinsGreen;
+
 
     private void Start()
     {
@@ -16,21 +19,27 @@ public class ItemManager : Singleton<ItemManager>
 
     private void Reset()
     {
-        coins = 0;
-        UpdateUI(); 
+        coins.value = 0;
+        coinsGreen.value = 0;
+        UpdateUI();
     }
 
     public void AddCoins(int amount = 1)
     {
-        coins += amount;
-        UpdateUI(); 
+        coins.value += amount;
+        UpdateUI();
     }
-    
+
+    public void AddGreenCoins(int amount = 1)
+    {
+        coinsGreen.value += amount;
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
-        if (uiTextCoins != null)
-        {
-            uiTextCoins.text = coins.ToString();
-        }
+        uiCoins.text = coins.value.ToString();
+        uiCoinsGreen.text = coinsGreen.value.ToString();
     }
+
 }

@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class ItemCollactableCoin : ItemCollactableBase
 {
+    public bool isGreenCoin = false;
+
     protected override void OnCollect()
     {
         base.OnCollect();
-        ItemManager.Instance.AddCoins();
+
+        if (isGreenCoin)
+        {
+            ItemManager.Instance.AddGreenCoins();
+        }
+        else
+        {
+            ItemManager.Instance.AddCoins();
+        }
     }
 }
