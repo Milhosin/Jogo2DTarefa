@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4642667545862498345}
   - component: {fileID: 3017198366002496640}
   - component: {fileID: 2748714847535390298}
-  - component: {fileID: 4010674122286351507}
+  - component: {fileID: 635545815234104993}
   m_Layer: 0
   m_Name: PFB_CoinGreen
   m_TagString: Untagged
@@ -115,7 +115,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4010674122286351507
+--- !u!114 &635545815234104993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,10 +124,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 74937714533602093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba9cd9d5a017de488ba60826313f840, type: 3}
+  m_Script: {fileID: 11500000, guid: aad0b87a60d3df2479aee9c3db53cde8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   compareTag: Player
+  particleSystem: {fileID: 0}
+  timeToHide: 3
+  graphicItem: {fileID: 8957728259469715114}
+  myCollider: {fileID: 3017198366002496640}
 --- !u!1 &8957728259469715114
 GameObject:
   m_ObjectHideFlags: 0

@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 
     private void HandleJump()
     {
-        if (Input.GetKey(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             myRigidbody.velocity = Vector2.up * soPlayerSetup.forceJump;
             myRigidbody.transform.localScale = Vector2.one;
@@ -115,12 +115,17 @@ public class Player : MonoBehaviour
     private void PlayerJumpVFX()
     {
         VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position);
+        if (Input.GetButtonDown("Jump") && IsGrounded())
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.jumpSound);
+        }
+
     }
 
     private void HandlescaleJump()
     {
         myRigidbody.transform.DOScaleY(soPlayerSetup.jumpScaleY, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
-        myRigidbody.transform.DOScaleY(soPlayerSetup.jumpScaleX, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
+        myRigidbody.transform.DOScaleX(soPlayerSetup.jumpScaleX, soPlayerSetup.animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(soPlayerSetup.ease);
     }
 
     public void DestroyMe()

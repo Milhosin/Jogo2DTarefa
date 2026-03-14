@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class ItemCollactableCoin : ItemCollactableBase
 {
-    public bool isGreenCoin = false;
-
     protected override void OnCollect()
     {
         base.OnCollect();
 
-        if (isGreenCoin)
+        if (AudioManager.Instance != null)
         {
-            ItemManager.Instance.AddGreenCoins();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.coinSound);
         }
-        else
-        {
-            ItemManager.Instance.AddCoins();
-        }
+
+        ItemManager.Instance.AddCoins();
     }
 }
+
+
+

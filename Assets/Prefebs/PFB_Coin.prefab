@@ -132,7 +132,7 @@ MonoBehaviour:
   particleSystem: {fileID: 4056345470223270869}
   timeToHide: 3
   graphicItem: {fileID: 8957728259469715114}
-  isGreenCoin: 0
+  collider: {fileID: 3017198366002496640}
 --- !u!1 &8957728259469715114
 GameObject:
   m_ObjectHideFlags: 0
